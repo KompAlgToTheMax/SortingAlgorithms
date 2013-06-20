@@ -5,7 +5,7 @@ public class Main {
 		RandomArrayGenerator rag = new RandomArrayGenerator();
 //		int[] intArr = rag.getRandomArray(111,10000);
 		
-		int[] intArr = {1,2,3,4,5,5};	
+		int[] intArr = {1,2,3,4,5};	
 //		for(int k = 0; k<intArr.length;k++) {
 //			System.out.println(intArr[k]);
 //		}
