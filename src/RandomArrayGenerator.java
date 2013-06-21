@@ -14,13 +14,13 @@ public class RandomArrayGenerator {
 		return list;
 	}
 	
-	public int[] getRandomArray(int digits, int seed) {
+	public int[] getRandomArray(int digits, int seed, int biggestNumber) {
 		
 		int[] a = new int[digits]; 
 		Random generator = new Random(seed);
 		
 		for(int i = 0; i<a.length; i++) {
-		     a[i] = Math.abs(generator.nextInt());
+		     a[i] = Math.abs(generator.nextInt(biggestNumber));
 		}
 		return a;
 	}

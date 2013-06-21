@@ -24,7 +24,7 @@ public class Main {
 		}
 		System.out.println("Compare Counter (MERGESORT): "+ Integer.toString(ms.getCompareCounter()));
 		System.out.println("Write Counter (MERGESORT): "+ Integer.toString(ms.getWriteCounter()));
-		
+		 
 		
 //		int[] arrQS = qsa.sort(0, intArr.length-1);
 //		
