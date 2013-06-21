@@ -1,18 +1,27 @@
+import java.util.ArrayList;
 import java.util.Random;
 
 
 public class RandomArrayGenerator {
 
-	public int[] getRandomArray(int digits, int highestValue) {
+	public ArrayList<int[]> getRandomArrays(int numberOfArrays, int numberIncrease, int seed) {
+		ArrayList<int[]> list = new ArrayList<int[]>();
+		
+		for(int i = 0;i<numberOfArrays;i++) {
+			list.add(getRandomArray(numberIncrease, seed));
+			numberIncrease += numberIncrease;
+		}
+		return list;
+	}
+	
+	public int[] getRandomArray(int digits, int seed) {
 		
 		int[] a = new int[digits]; 
-		Random generator = new Random(2);
+		Random generator = new Random(seed);
 		
 		for(int i = 0; i<a.length; i++) {
-			
-		     a[i] = (int)(generator.nextInt(highestValue));
+		     a[i] = Math.abs(generator.nextInt());
 		}
-		
 		return a;
 	}
 }
