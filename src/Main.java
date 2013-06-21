@@ -2,6 +2,7 @@ public class Main {
 
 	public static void main(String[] args) {
 
+		
 		RandomArrayGenerator rag = new RandomArrayGenerator();
 //		int[] intArr = rag.getRandomArray(111,10000);
 		
