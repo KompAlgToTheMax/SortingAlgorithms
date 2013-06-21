@@ -15,7 +15,6 @@ public class Main {
 //		MergeSortAlgorithm ms = new MergeSortAlgorithm(intArr);
 //		QuickSortAlgorithm qsa = new QuickSortAlgorithm(intArr);
 
-<<<<<<< HEAD
 		ArrayList<int[]> dataList = rag.getRandomArrays(10, 10, 0,1000);
 		
 //		int[] arrMS = ms.sort(0, intArr.length - 1);
@@ -24,7 +23,7 @@ public class Main {
 //		}
 //		System.out.println("Compare Counter (MERGESORT): "+ Integer.toString(ms.getCompareCounter()));
 //		System.out.println("Write Counter (MERGESORT): "+ Integer.toString(ms.getWriteCounter()));
-=======
+
 		ArrayList<int[]> dataList = rag.getRandomArrays(10, 10, 0);
 		
 		int[] arrMS = ms.sort(0, intArr.length - 1);
@@ -33,8 +32,7 @@ public class Main {
 		}
 		System.out.println("Compare Counter (MERGESORT): "+ Integer.toString(ms.getCompareCounter()));
 		System.out.println("Write Counter (MERGESORT): "+ Integer.toString(ms.getWriteCounter()));
->>>>>>> 2f080c7aa4aee0a114b17e6597fe3c520ff14a45
-		 
+
 		
 //		int[] arrQS = qsa.sort(0, intArr.length-1);
 //		
