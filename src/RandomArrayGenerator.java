@@ -4,23 +4,23 @@ import java.util.Random;
 
 public class RandomArrayGenerator {
 
-	public ArrayList<int[]> getRandomArrays(int numberOfArrays, int numberIncrease, int seed) {
+	public ArrayList<int[]> getRandomArrays(int numberOfArrays, int numberIncrease, int seed, int biggestNumber) {
 		ArrayList<int[]> list = new ArrayList<int[]>();
 		
 		for(int i = 0;i<numberOfArrays;i++) {
-			list.add(getRandomArray(numberIncrease, seed));
+			list.add(getRandomArray(numberIncrease, seed,biggestNumber));
 			numberIncrease += numberIncrease;
 		}
 		return list;
 	}
 	
-	public int[] getRandomArray(int digits, int seed) {
+	public int[] getRandomArray(int digits, int seed, int biggestNumber) {
 		
 		int[] a = new int[digits]; 
 		Random generator = new Random(seed);
 		
 		for(int i = 0; i<a.length; i++) {
-		     a[i] = Math.abs(generator.nextInt());
+		     a[i] = Math.abs(generator.nextInt(biggestNumber));
 		}
 		return a;
 	}

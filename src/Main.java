@@ -6,25 +6,24 @@ public class Main {
 
 		
 		RandomArrayGenerator rag = new RandomArrayGenerator();
-		int[] intArr = rag.getRandomArray(500,0);
 		
 //		int[] intArr = {1,2,3,4,5};	
 //		for(int k = 0; k<intArr.length;k++) {
 //			System.out.println(intArr[k]);
 //		}
 
-		MergeSortAlgorithm ms = new MergeSortAlgorithm(intArr);
-		QuickSortAlgorithm qsa = new QuickSortAlgorithm(intArr);
+//		MergeSortAlgorithm ms = new MergeSortAlgorithm(intArr);
+//		QuickSortAlgorithm qsa = new QuickSortAlgorithm(intArr);
 
-		ArrayList<int[]> dataList = rag.getRandomArrays(10, 10, 0);
+		ArrayList<int[]> dataList = rag.getRandomArrays(10, 10, 0,1000);
 		
-		int[] arrMS = ms.sort(0, intArr.length - 1);
-		for (int i = 0; i < arrMS.length; i++) {
-			System.out.println(i + 1 + ": " + arrMS[i]);
-		}
-		System.out.println("Compare Counter (MERGESORT): "+ Integer.toString(ms.getCompareCounter()));
-		System.out.println("Write Counter (MERGESORT): "+ Integer.toString(ms.getWriteCounter()));
-		
+//		int[] arrMS = ms.sort(0, intArr.length - 1);
+//		for (int i = 0; i < arrMS.length; i++) {
+//			System.out.println(i + 1 + ": " + arrMS[i]);
+//		}
+//		System.out.println("Compare Counter (MERGESORT): "+ Integer.toString(ms.getCompareCounter()));
+//		System.out.println("Write Counter (MERGESORT): "+ Integer.toString(ms.getWriteCounter()));
+		 
 		
 //		int[] arrQS = qsa.sort(0, intArr.length-1);
 //		
