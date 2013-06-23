@@ -6,10 +6,11 @@ public class RandomArrayGenerator {
 
 	public ArrayList<int[]> getRandomArrays(int numberOfArrays, int numberIncrease, int seed, int biggestNumber) {
 		ArrayList<int[]> list = new ArrayList<int[]>();
+		int size = numberIncrease;
 		
 		for(int i = 0;i<numberOfArrays;i++) {
-			list.add(getRandomArray(numberIncrease, seed,biggestNumber));
-			numberIncrease += numberIncrease;
+			list.add(getRandomArray(size, seed,biggestNumber));
+			size *= numberIncrease;
 		}
 		return list;
 	}
