@@ -2,48 +2,53 @@ public class QuickSortAlgorithm {
 
 	public static int[] intArr = null;
 	private int compareCounter = 0;
-	
+	private int writeCounter = 0;
+
 	public QuickSortAlgorithm(int[] arr) {
 		intArr = arr;
 	}
-	
+
 	public int getCompareCounter() {
 		return compareCounter;
 	}
 
-	public int[] sort(int left, int right) {
-		compareCounter++;
-		if (left < right) {
-			int indexPivot = partition(left, right);
-			sort(left, indexPivot);
-			sort(indexPivot + 1, right);
-		}
-		return intArr;
+	public int getWriteCounter() {
+		return writeCounter;
 	}
 
-	int partition(int left, int right) {
+
+	public void sort(int low, int high) {
+		int i = low, j = high, tmp;
+		int pivot = intArr[(low + high) / 2];
 		
-		int low = left - 1;
-		int high = right + 1;
-		int pivot = intArr[(left + right) / 2];
-
-		do {
-			low++;
-		} while (intArr[low] < pivot);
-
-		do {
-			high--;
-		} while (intArr[high] > pivot);
-
-		compareCounter++;
-		if (low < high) {
-			int k = intArr[low];
-			intArr[low] = intArr[high];
-			intArr[high] = k;
-		} else {
-			return high;
+		{
+			compareCounter++;
+			while (intArr[i] < pivot) {
+				compareCounter++;
+				i++;
+			}
+			compareCounter++;
+			while (intArr[j] > pivot) {
+				compareCounter++;
+				j--;
+			}
+			
+			if (i <= j) {
+				tmp = intArr[i];
+				writeCounter+=2;
+				intArr[i] = intArr[j];
+				intArr[j] = tmp;
+				i++;
+				j--;
+			}
 		}
-		return -1;
+		
+		if (low < j) {
+			sort(low, j);
+		}
+		if (i < high) {
+			sort(i, high);
+		}
 	}
 
 }
