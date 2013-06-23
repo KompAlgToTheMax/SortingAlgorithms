@@ -6,38 +6,48 @@ public class Main {
 
 		RandomArrayGenerator rag = new RandomArrayGenerator();
 
-		SortStatistic sortStat = new SortStatistic();
-		sortStat.setBiggestNumber(10000);
-		sortStat.setNumberIncrease(2);
-		sortStat.setNumberOfArrays(10);
-		sortStat.setSeed(0);
+		SortStatistic sortStatQS = new SortStatistic();
+		sortStatQS.setBiggestNumber(10000);
+		sortStatQS.setNumberIncrease(2);
+		sortStatQS.setNumberOfArrays(10);
+		sortStatQS.setSeed(0);
 
 		ArrayList<int[]> arrayList = rag.getRandomArrays(
-				sortStat.getNumberOfArrays(), sortStat.getNumberIncrease(),
-				sortStat.getSeed(), sortStat.getBiggestNumber());
-
-		// MergeSortAlgorithm ms = null;
-		//
-		// for(int[] array : arrayList) {
-		// ms = new MergeSortAlgorithm(array);
-		// ms.sort(0, array.length-1);
-		// sortStat.addCompareCounter(ms.getCompareCounter());
-		// sortStat.addWriteAccessCounter(ms.getWriteCounter());
-		// }
+				sortStatQS.getNumberOfArrays(), sortStatQS.getNumberIncrease(),
+				sortStatQS.getSeed(), sortStatQS.getBiggestNumber());
 
 		QuickSortAlgorithm qsa = null;
 
 		for (int[] array : arrayList) {
 			qsa = new QuickSortAlgorithm(array);
 			qsa.sort(0, array.length - 1);
-			sortStat.addCompareCounter(qsa.getCompareCounter());
-			sortStat.addWriteAccessCounter(qsa.getWriteCounter());
+			sortStatQS.addCompareCounter(qsa.getCompareCounter());
+			sortStatQS.addWriteAccessCounter(qsa.getWriteCounter());
 		}
 
-		CSVWriter csvWrite = new CSVWriter(sortStat);
-		csvWrite.writeStatistic();
-		csvWrite.writeCompares();
-		csvWrite.writeWritingAccesses();
+		CSVWriter csvWriteQS = new CSVWriter("QS", sortStatQS);
+		csvWriteQS.writeStatistic();
+		csvWriteQS.writeCompares();
+		csvWriteQS.writeWritingAccesses();
 
+		MergeSortAlgorithm ms = null;
+
+		SortStatistic sortStatMS = new SortStatistic();
+		sortStatMS.setBiggestNumber(10000);
+		sortStatMS.setNumberIncrease(2);
+		sortStatMS.setNumberOfArrays(10);
+		sortStatMS.setSeed(0);
+
+		for (int[] array : arrayList) {
+			ms = new MergeSortAlgorithm(array);
+			ms.sort(0, array.length - 1);
+			sortStatMS.addCompareCounter(ms.getCompareCounter());
+			sortStatMS.addWriteAccessCounter(ms.getWriteCounter());
+		}
+
+		CSVWriter csvWriteMS = new CSVWriter("MS", sortStatMS);
+		csvWriteMS.writeStatistic();
+		csvWriteMS.writeCompares();
+		csvWriteMS.writeWritingAccesses();
 	}
 }

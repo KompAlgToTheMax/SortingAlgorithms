@@ -3,19 +3,19 @@ public class MergeSortAlgorithm {
 	private int[] intArr = null;
 	private int compareCounter = 0;
 	private int writeCounter = 0;
-	
+
 	public MergeSortAlgorithm(int[] arr) {
-		intArr = arr; 
+		intArr = arr;
 	}
-	
+
 	public int getCompareCounter() {
 		return compareCounter;
 	}
-	
+
 	public int getWriteCounter() {
 		return writeCounter;
 	}
-	
+
 	public int[] sort(int l, int r) {
 		compareCounter++;
 		if (l < r) {

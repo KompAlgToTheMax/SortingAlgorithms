@@ -1,6 +1,8 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class CSVWriter {
 
@@ -9,14 +11,20 @@ public class CSVWriter {
 	File writingAccesses;
 	File comparingOperations;
 	File sortingStatistic;
+	String measurementName;
+	Date now;
+	SimpleDateFormat sdf;
 
-	public CSVWriter(SortStatistic ss) {
+	public CSVWriter(String measurementName,SortStatistic ss) {
 		this.ss = ss;
+		this.measurementName = measurementName;
+		this.now = new Date();
+		this.sdf = new SimpleDateFormat("dd.MM.yyyy HH.mm.ss");
 	}
 
 	public void writeStatistic() {
-
-		sortingStatistic = new File("sortingStatistic.txt");
+		
+		sortingStatistic = new File(sdf.format(now)+"_"+measurementName+"_sortingStatistic.txt");
 
 		try {
 			writer = new FileWriter(sortingStatistic, false);
@@ -38,7 +46,7 @@ public class CSVWriter {
 
 	public void writeWritingAccesses() {
 
-		writingAccesses = new File("writingAccesses.txt");
+		writingAccesses = new File(sdf.format(now)+"_"+measurementName+"_writingAccesses.txt");
 
 		try {
 			writer = new FileWriter(writingAccesses, false);
@@ -57,7 +65,7 @@ public class CSVWriter {
 
 	public void writeCompares() {
 
-		comparingOperations = new File("comparingOperations.txt");
+		comparingOperations = new File(sdf.format(now)+"_"+measurementName+"_comparingOperations.txt");
 
 		try {
 			writer = new FileWriter(comparingOperations, false);

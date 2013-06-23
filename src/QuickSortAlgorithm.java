@@ -16,11 +16,10 @@ public class QuickSortAlgorithm {
 		return writeCounter;
 	}
 
-
 	public void sort(int low, int high) {
 		int i = low, j = high, tmp;
 		int pivot = intArr[(low + high) / 2];
-		
+
 		{
 			compareCounter++;
 			while (intArr[i] < pivot) {
@@ -32,17 +31,17 @@ public class QuickSortAlgorithm {
 				compareCounter++;
 				j--;
 			}
-			
+
 			if (i <= j) {
 				tmp = intArr[i];
-				writeCounter+=2;
+				writeCounter += 2;
 				intArr[i] = intArr[j];
 				intArr[j] = tmp;
 				i++;
 				j--;
 			}
 		}
-		
+
 		if (low < j) {
 			sort(low, j);
 		}
@@ -50,5 +49,4 @@ public class QuickSortAlgorithm {
 			sort(i, high);
 		}
 	}
-
 }
