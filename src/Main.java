@@ -7,9 +7,9 @@ public class Main {
 		RandomArrayGenerator rag = new RandomArrayGenerator();
 
 		SortStatistic sortStatQS = new SortStatistic();
-		sortStatQS.setBiggestNumber(10000);
-		sortStatQS.setNumberIncrease(2);
-		sortStatQS.setNumberOfArrays(10);
+		sortStatQS.setBiggestNumber(Integer.SIZE);
+		sortStatQS.setNumberIncrease(10);
+		sortStatQS.setNumberOfArrays(100);
 		sortStatQS.setSeed(0);
 
 		ArrayList<int[]> arrayList = rag.getRandomArrays(
