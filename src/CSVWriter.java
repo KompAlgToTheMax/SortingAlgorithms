@@ -14,17 +14,22 @@ public class CSVWriter {
 	String measurementName;
 	Date now;
 	SimpleDateFormat sdf;
+	String timeStamp;
 
 	public CSVWriter(String measurementName,SortStatistic ss) {
 		this.ss = ss;
 		this.measurementName = measurementName;
 		this.now = new Date();
-		this.sdf = new SimpleDateFormat("dd.MM.yyyy HH.mm.ss");
+		this.sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+		
+		timeStamp = sdf.format(now);
+		File dir = new File(timeStamp);
+		dir.mkdir();
 	}
 
 	public void writeStatistic() {
 		
-		sortingStatistic = new File(sdf.format(now)+"_"+measurementName+"_sortingStatistic.txt");
+		sortingStatistic = new File(timeStamp+"/"+measurementName+"_sortingStatistic.txt");
 
 		try {
 			writer = new FileWriter(sortingStatistic, false);
@@ -45,8 +50,8 @@ public class CSVWriter {
 	}
 
 	public void writeWritingAccesses() {
-
-		writingAccesses = new File(sdf.format(now)+"_"+measurementName+"_writingAccesses.txt");
+		
+		writingAccesses = new File(timeStamp+"/"+measurementName+"_writingAccesses.txt");
 
 		try {
 			writer = new FileWriter(writingAccesses, false);
@@ -65,7 +70,7 @@ public class CSVWriter {
 
 	public void writeCompares() {
 
-		comparingOperations = new File(sdf.format(now)+"_"+measurementName+"_comparingOperations.txt");
+		comparingOperations = new File(timeStamp+"/"+measurementName+"_comparingOperations.txt");
 
 		try {
 			writer = new FileWriter(comparingOperations, false);

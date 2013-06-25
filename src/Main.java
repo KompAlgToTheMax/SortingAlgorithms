@@ -8,8 +8,8 @@ public class Main {
 
 		SortStatistic sortStatQS = new SortStatistic();
 		sortStatQS.setBiggestNumber(Integer.SIZE);
-		sortStatQS.setNumberIncrease(10);
-		sortStatQS.setNumberOfArrays(100);
+		sortStatQS.setNumberIncrease(1);
+		sortStatQS.setNumberOfArrays(400);
 		sortStatQS.setSeed(0);
 
 		ArrayList<int[]> arrayList = rag.getRandomArrays(
@@ -33,9 +33,9 @@ public class Main {
 		MergeSortAlgorithm ms = null;
 
 		SortStatistic sortStatMS = new SortStatistic();
-		sortStatMS.setBiggestNumber(10000);
-		sortStatMS.setNumberIncrease(2);
-		sortStatMS.setNumberOfArrays(10);
+		sortStatMS.setBiggestNumber(Integer.SIZE);
+		sortStatMS.setNumberIncrease(1);
+		sortStatMS.setNumberOfArrays(400);
 		sortStatMS.setSeed(0);
 
 		for (int[] array : arrayList) {
