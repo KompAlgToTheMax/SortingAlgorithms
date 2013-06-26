@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 
 public class Main {
 
@@ -6,46 +5,62 @@ public class Main {
 
 		RandomArrayGenerator rag = new RandomArrayGenerator();
 
-		SortStatistic sortStatQS = new SortStatistic();
-		sortStatQS.setBiggestNumber(Integer.SIZE);
-		sortStatQS.setNumberIncrease(1);
-		sortStatQS.setNumberOfArrays(400);
-		sortStatQS.setSeed(0);
-
-		ArrayList<int[]> arrayList = rag.getRandomArrays(
-				sortStatQS.getNumberOfArrays(), sortStatQS.getNumberIncrease(),
-				sortStatQS.getSeed(), sortStatQS.getBiggestNumber());
+		SortStatistic sortStat = new SortStatistic();
+		sortStat.setBiggestNumber(Integer.MAX_VALUE);
+		sortStat.setNumberIncrease(1);
+		sortStat.setNumberOfArrays(10000);
+		sortStat.setSeed(0);
 
 		QuickSortAlgorithm qsa = null;
 
-		for (int[] array : arrayList) {
+		int size = sortStat.getNumberIncrease();
+		
+		for (int i = 1;i<(sortStat.getNumberIncrease()*sortStat.getNumberOfArrays());i++) {
+			int[] array = rag.getRandomArray(size, 0, Integer.MAX_VALUE);
+			
 			qsa = new QuickSortAlgorithm(array);
 			qsa.sort(0, array.length - 1);
-			sortStatQS.addCompareCounter(qsa.getCompareCounter());
-			sortStatQS.addWriteAccessCounter(qsa.getWriteCounter());
+			
+			sortStat.addCompareCounter(qsa.getCompareCounter());
+			sortStat.addWriteAccessCounter(qsa.getWriteCounter());
+			
+			size+=sortStat.getNumberIncrease();
 		}
 
-		CSVWriter csvWriteQS = new CSVWriter("QS", sortStatQS);
+		CSVWriter csvWriteQS = new CSVWriter();
+		csvWriteQS.setSortStatistic(sortStat);
+		csvWriteQS.setMeasurementName("QS");
 		csvWriteQS.writeStatistic();
 		csvWriteQS.writeCompares();
 		csvWriteQS.writeWritingAccesses();
 
 		MergeSortAlgorithm ms = null;
 
-		SortStatistic sortStatMS = new SortStatistic();
-		sortStatMS.setBiggestNumber(Integer.SIZE);
-		sortStatMS.setNumberIncrease(1);
-		sortStatMS.setNumberOfArrays(400);
-		sortStatMS.setSeed(0);
+		
+		sortStat = new SortStatistic();
+		sortStat.setBiggestNumber(Integer.MAX_VALUE);
+		sortStat.setNumberIncrease(1);
+		sortStat.setNumberOfArrays(10000);
+		sortStat.setSeed(0);
 
-		for (int[] array : arrayList) {
+		
+		int sizeMS = sortStat.getNumberIncrease();
+		
+		for (int i = 1;i<(sortStat.getNumberIncrease()*sortStat.getNumberOfArrays());i++) {
+			int[] array = rag.getRandomArray(sizeMS, 0, Integer.MAX_VALUE);
+			
 			ms = new MergeSortAlgorithm(array);
-			ms.sort(0, array.length - 1);
-			sortStatMS.addCompareCounter(ms.getCompareCounter());
-			sortStatMS.addWriteAccessCounter(ms.getWriteCounter());
+  			ms.sort(0, array.length - 1);
+			
+  			sortStat.addCompareCounter(ms.getCompareCounter());
+  			sortStat.addWriteAccessCounter(ms.getWriteCounter());
+			
+			sizeMS+=sortStat.getNumberIncrease();
 		}
-
-		CSVWriter csvWriteMS = new CSVWriter("MS", sortStatMS);
+		
+		CSVWriter csvWriteMS = new CSVWriter();
+		csvWriteMS.setSortStatistic(sortStat);
+		csvWriteMS.setMeasurementName("MS");
 		csvWriteMS.writeStatistic();
 		csvWriteMS.writeCompares();
 		csvWriteMS.writeWritingAccesses();

@@ -18,8 +18,9 @@ public class QuickSortAlgorithm {
 
 	public void sort(int low, int high) {
 		int i = low, j = high, tmp;
-		int pivot = intArr[(low + high) / 2];
+		int pivot = intArr[(low+high)/2];
 
+		while (i <= j)
 		{
 			compareCounter++;
 			while (intArr[i] < pivot) {

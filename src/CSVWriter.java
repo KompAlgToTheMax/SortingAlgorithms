@@ -16,12 +16,21 @@ public class CSVWriter {
 	SimpleDateFormat sdf;
 	String timeStamp;
 
-	public CSVWriter(String measurementName,SortStatistic ss) {
+	public CSVWriter() {
+
+	}
+	
+	public void setSortStatistic(SortStatistic ss) {
 		this.ss = ss;
+	}
+	
+	public void setMeasurementName(String measurementName) {
 		this.measurementName = measurementName;
+	}
+	
+	public void createMeasurementDir() {
 		this.now = new Date();
-		this.sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
-		
+		this.sdf = new SimpleDateFormat("dd.MM.yyyy HH.mm.ss");	
 		timeStamp = sdf.format(now);
 		File dir = new File(timeStamp);
 		dir.mkdir();
