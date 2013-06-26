@@ -1,8 +1,8 @@
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class CSVWriter {
 
@@ -12,33 +12,31 @@ public class CSVWriter {
 	File comparingOperations;
 	File sortingStatistic;
 	String measurementName;
-	Date now;
-	SimpleDateFormat sdf;
-	String timeStamp;
+	String output;
+	FileReader fr;
+	BufferedReader br;
 
 	public CSVWriter() {
 
 	}
-	
+
 	public void setSortStatistic(SortStatistic ss) {
 		this.ss = ss;
 	}
-	
+
 	public void setMeasurementName(String measurementName) {
 		this.measurementName = measurementName;
 	}
-	
+
 	public void createMeasurementDir() {
-		this.now = new Date();
-		this.sdf = new SimpleDateFormat("dd.MM.yyyy HH.mm.ss");	
-		timeStamp = sdf.format(now);
-		File dir = new File(timeStamp);
+		output = "output";
+		File dir = new File(output);
 		dir.mkdir();
 	}
 
 	public void writeStatistic() {
-		
-		sortingStatistic = new File(timeStamp+"/"+"Statistic.txt");
+
+		sortingStatistic = new File(output.toString() + "/" + "Statistic.txt");
 
 		try {
 			writer = new FileWriter(sortingStatistic, false);
@@ -50,9 +48,11 @@ public class CSVWriter {
 			writer.write(System.getProperty("line.separator"));
 			writer.write("Seed: " + ss.getSeed());
 			writer.write(System.getProperty("line.separator"));
-			writer.write("Smallest array includes "+ss.getArrayIncrease()+ " elements.");
+			writer.write("Smallest array includes " + ss.getArrayIncrease()
+					+ " elements.");
 			writer.write(System.getProperty("line.separator"));
-			writer.write("Biggest array includes "+ss.getArrayIncrease()*ss.getNumberOfArrays()+ " elements.");
+			writer.write("Biggest array includes " + ss.getArrayIncrease()
+					* ss.getNumberOfArrays() + " elements.");
 			writer.flush();
 			writer.close();
 
@@ -62,41 +62,98 @@ public class CSVWriter {
 	}
 
 	public void writeWritingAccesses() {
+
+		String path = output.toString() + "/" + measurementName
+				+ "_writingAccesses.txt";
 		
-		writingAccesses = new File(timeStamp+"/"+measurementName+"_writingAccesses.txt");
+		writingAccesses = new File(path);
 
-		try {
-			writer = new FileWriter(writingAccesses, false);
+		
+		if (writingAccesses.exists()) {
+			try {
 
-			for(int value : ss.getWriteAccesses()) {
-				writer.write(Integer.toString(value));
-				writer.write(System.getProperty("line.separator"));
+				fr = new FileReader(path);
+				br = new BufferedReader(fr);
+				StringBuffer buffer = new StringBuffer();
+
+				for (int value : ss.getWriteAccesses()) {
+					buffer.append(br.readLine().concat(" ")
+							.concat(Integer.toString(value)));
+					buffer.append(System.getProperty("line.separator"));
+				}
+
+				writer = new FileWriter(writingAccesses, false);
+				writer.write(buffer.toString());
+				writer.close();
+				br.close();
+				fr.close();
+
+			} catch (Exception ex) {
+
 			}
-			writer.flush();
-			writer.close();
+		} else {
 
-		} catch (IOException e) {
-			e.printStackTrace();
+			try {
+				writer = new FileWriter(writingAccesses, false);
+
+				for (int value : ss.getWriteAccesses()) {
+					writer.write(Integer.toString(value));
+					writer.write(System.getProperty("line.separator"));
+				}
+				writer.flush();
+				writer.close();
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	public void writeCompares() {
 
-		comparingOperations = new File(timeStamp+"/"+measurementName+"_comparingOperations.txt");
+		String path = output.toString() + "/" + measurementName
+				+ "_comparingOperations.txt";
 
-		try {
-			writer = new FileWriter(comparingOperations, false);
+		comparingOperations = new File(path);
 
- 			for(int value : ss.getValuesCompares()) {
-				writer.write(Integer.toString(value));
-				writer.write(System.getProperty("line.separator"));
+		if (comparingOperations.exists()) {
+			try {
+
+				fr = new FileReader(path);
+				br = new BufferedReader(fr);
+				StringBuffer buffer = new StringBuffer();
+
+				for (int value : ss.getValuesCompares()) {
+					buffer.append(br.readLine().concat(" ")
+							.concat(Integer.toString(value)));
+					buffer.append(System.getProperty("line.separator"));
+				}
+
+				writer = new FileWriter(comparingOperations, false);
+				writer.write(buffer.toString());
+				writer.close();
+				br.close();
+				fr.close();
+
+			} catch (Exception ex) {
+
 			}
-			
-			writer.flush();
-			writer.close();
+		} else {
 
-		} catch (IOException e) {
-			e.printStackTrace();
+			try {
+				writer = new FileWriter(comparingOperations, false);
+
+				for (int value : ss.getValuesCompares()) {
+					writer.write(Integer.toString(value));
+					writer.write(System.getProperty("line.separator"));
+				}
+
+				writer.flush();
+				writer.close();
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
