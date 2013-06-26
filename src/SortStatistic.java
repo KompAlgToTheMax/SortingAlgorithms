@@ -45,7 +45,7 @@ public class SortStatistic {
 		return numberIncrease;
 	}
 
-	public void setNumberIncrease(int numberIncrease) {
+	public void setArrayIncrease(int numberIncrease) {
 		this.numberIncrease = numberIncrease;
 	}
 

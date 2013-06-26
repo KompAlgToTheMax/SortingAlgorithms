@@ -38,7 +38,7 @@ public class CSVWriter {
 
 	public void writeStatistic() {
 		
-		sortingStatistic = new File(timeStamp+"/"+measurementName+"_sortingStatistic.txt");
+		sortingStatistic = new File(timeStamp+"/"+"SortingStatistic.txt");
 
 		try {
 			writer = new FileWriter(sortingStatistic, false);
@@ -46,7 +46,7 @@ public class CSVWriter {
 			writer.write(System.getProperty("line.separator"));
 			writer.write("Biggest number: " + ss.getBiggestNumber());
 			writer.write(System.getProperty("line.separator"));
-			writer.write("Number increase: " + ss.getNumberIncrease());
+			writer.write("Array increase: " + ss.getNumberIncrease());
 			writer.write(System.getProperty("line.separator"));
 			writer.write("Seed: " + ss.getSeed());
 

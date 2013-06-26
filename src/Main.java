@@ -1,15 +1,20 @@
 
 public class Main {
 
+	private static int BiggestNumber = Integer.MAX_VALUE;
+	private static int ArrayIncrease = 1;
+	private static int NumberOfArrays = 10000;
+	private static int Seed = 0;
+	
 	public static void main(String[] args) {
 
 		RandomArrayGenerator rag = new RandomArrayGenerator();
 
 		SortStatistic sortStat = new SortStatistic();
-		sortStat.setBiggestNumber(Integer.MAX_VALUE);
-		sortStat.setNumberIncrease(1);
-		sortStat.setNumberOfArrays(10000);
-		sortStat.setSeed(0);
+		sortStat.setBiggestNumber(BiggestNumber);
+		sortStat.setArrayIncrease(ArrayIncrease);
+		sortStat.setNumberOfArrays(NumberOfArrays);
+		sortStat.setSeed(Seed);
 
 		QuickSortAlgorithm qsa = null;
 
@@ -27,19 +32,20 @@ public class Main {
 			size+=sortStat.getNumberIncrease();
 		}
 
-		CSVWriter csvWriteQS = new CSVWriter();
-		csvWriteQS.setSortStatistic(sortStat);
-		csvWriteQS.setMeasurementName("QS");
-		csvWriteQS.writeStatistic();
-		csvWriteQS.writeCompares();
-		csvWriteQS.writeWritingAccesses();
+		CSVWriter csvWrite = new CSVWriter();
+		csvWrite.setSortStatistic(sortStat);
+		csvWrite.createMeasurementDir();
+		csvWrite.setMeasurementName("QS");
+		csvWrite.writeStatistic();
+		csvWrite.writeCompares();
+		csvWrite.writeWritingAccesses();
 
 		MergeSortAlgorithm ms = null;
 
 		
 		sortStat = new SortStatistic();
 		sortStat.setBiggestNumber(Integer.MAX_VALUE);
-		sortStat.setNumberIncrease(1);
+		sortStat.setArrayIncrease(1);
 		sortStat.setNumberOfArrays(10000);
 		sortStat.setSeed(0);
 
@@ -58,11 +64,9 @@ public class Main {
 			sizeMS+=sortStat.getNumberIncrease();
 		}
 		
-		CSVWriter csvWriteMS = new CSVWriter();
-		csvWriteMS.setSortStatistic(sortStat);
-		csvWriteMS.setMeasurementName("MS");
-		csvWriteMS.writeStatistic();
-		csvWriteMS.writeCompares();
-		csvWriteMS.writeWritingAccesses();
+		csvWrite.setSortStatistic(sortStat);
+		csvWrite.setMeasurementName("MS");
+		csvWrite.writeCompares();
+		csvWrite.writeWritingAccesses();
 	}
 }
