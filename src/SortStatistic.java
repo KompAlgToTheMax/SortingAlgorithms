@@ -5,12 +5,21 @@ public class SortStatistic {
 	private ArrayList<Integer> valuesCompares = new ArrayList<Integer>();
 	private ArrayList<Integer> writeAccesses = new ArrayList<Integer>();
 	private int numberOfArrays = 0;
+	private int initialArraySize = 0;
 	private int biggestNumber = 0;
 	private int numberIncrease = 0;
 	private int seed = 0;
-
+	
 	public ArrayList<Integer> getValuesCompares() {
 		return valuesCompares;
+	}
+
+	public int getInitialArraySize() {
+		return initialArraySize;
+	}
+
+	public void setInitialArraySize(int initialArraySize) {
+		this.initialArraySize = initialArraySize;
 	}
 
 	public void setValuesCompares(ArrayList<Integer> valuesCompares) {

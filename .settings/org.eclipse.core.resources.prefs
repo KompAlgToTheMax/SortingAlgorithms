@@ -1,4 +1,8 @@
 eclipse.preferences.version=1
 encoding//src/CSVWriter.java=UTF-8
 encoding//src/Main.java=UTF-8
+encoding//src/MergeSortAlgorithm.java=UTF-8
 encoding//src/QuickSortAlgorithm.java=UTF-8
+encoding//src/RandomArrayGenerator.java=UTF-8
+encoding//src/SortingProcedureMS.java=UTF-8
+encoding//src/SortingProcedureQS.java=UTF-8

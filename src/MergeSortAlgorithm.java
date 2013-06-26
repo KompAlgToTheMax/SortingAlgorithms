@@ -17,6 +17,12 @@ public class MergeSortAlgorithm {
 	}
 
 	public int[] sort(int l, int r) {
+
+		/**
+		 * l ist der erste Teil-Array-Index, r ist der letzte Teil-Array-Index.
+		 * Wenn r und l gleich sind, ist das Teil-Array nur noch ein Element
+		 * groß. Dies ist die Abbruchbedingung für die Rekursion.
+		 */
 		compareCounter++;
 		if (l < r) {
 			int q = (l + r) / 2;
@@ -29,6 +35,11 @@ public class MergeSortAlgorithm {
 	}
 
 	private void merge(int l, int q, int r) {
+		/**
+		 * Das zu sortierende Array wird fortlaufend rekursiv in zwei Teile aufgeteilt. 
+		 * Die Teilstücke werden über ein Hilfsarray (arr) sortiert und im Ausgangsarray 
+		 * zusammengeführt.
+		 */
 		int[] arr = new int[intArr.length];
 		int i, j;
 		for (i = l; i <= q; i++) {

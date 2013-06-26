@@ -18,11 +18,20 @@ public class QuickSortAlgorithm {
 
 	public void sort(int low, int high) {
 		int i = low, j = high, tmp;
-		int pivot = intArr[(low+high)/2];
+		int pivot = intArr[(low + high) / 2];
 
-		while (i <= j)
-		{
+		
+		// aufteilen und sortieren
+		while (i <= j) {
+			
+			/**
+			 * Wandere mit i nach rechts, bis ein Wert größer oder gleich dem
+			 * Pivotelement gefunden wurde. Entsprechend wird mit j nach links
+			 * gewandert, bis ein Wert kleiner oder gleich dem Pivotelement gefunden
+			 * wird:
+			 */
 			compareCounter++;
+			
 			while (intArr[i] < pivot) {
 				compareCounter++;
 				i++;
@@ -33,6 +42,11 @@ public class QuickSortAlgorithm {
 				j--;
 			}
 
+			/**
+			 * Wenn sich i und j noch nicht ueberkreuzt haben, steht rechts ein
+			 * kleinerer Wert als links, also werden die Werte bei i und j
+			 * vertauscht und i und j weiterbewegt:
+			 */
 			if (i <= j) {
 				tmp = intArr[i];
 				writeCounter += 2;
@@ -43,6 +57,11 @@ public class QuickSortAlgorithm {
 			}
 		}
 
+		/** 
+		 * Rekursion: (nur solange das Teil-Array noch mindestens
+		 * zwei Elemente hat, der linke Index also echt kleiner als 
+		 * der rechte Index ist.)
+		 */
 		if (low < j) {
 			sort(low, j);
 		}

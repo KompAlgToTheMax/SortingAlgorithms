@@ -3,25 +3,32 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CSVWriter {
 
-	SortStatistic ss;
-	FileWriter writer;
-	File writingAccesses;
-	File comparingOperations;
-	File sortingStatistic;
-	String measurementName;
-	String output;
-	FileReader fr;
-	BufferedReader br;
+	private SortStatistic sortStat;
+	private FileWriter writer;
+	private File writingAccesses;
+	private File comparingOperations;
+	private File sortingStatistic;
+	private String measurementName;
+	private String output;
+	private FileReader fr;
+	private BufferedReader br;
+	private List<Integer> seedList = new ArrayList<Integer>();
+	
 
-	public CSVWriter() {
-
+	
+	public void addSeed(int seed) {
+		if(!seedList.contains(seed)) {
+			seedList.add(seed);
+		}		
 	}
 
 	public void setSortStatistic(SortStatistic ss) {
-		this.ss = ss;
+		this.sortStat = ss;
 	}
 
 	public void setMeasurementName(String measurementName) {
@@ -33,26 +40,47 @@ public class CSVWriter {
 		File dir = new File(output);
 		dir.mkdir();
 	}
+	
 
+	/**
+	 * Mit der Methode writeStatistic wird die Gesamtstatistik für den kompletten
+	 * Programmdurchlauf (alle Sortiervorgänge mit beiden Algorithmen) geschrieben.
+	 */
 	public void writeStatistic() {
 
 		sortingStatistic = new File(output.toString() + "/" + "Statistic.txt");
 
 		try {
 			writer = new FileWriter(sortingStatistic, false);
-			writer.write("Number of arrays: " + ss.getNumberOfArrays());
+			writer.write("Number of sorted arrays for each seed: " + sortStat.getNumberOfArrays());
 			writer.write(System.getProperty("line.separator"));
-			writer.write("Biggest number: " + ss.getBiggestNumber());
+
+			writer.write("Total number of sorted arrays: "+seedList.size()*sortStat.getNumberOfArrays());
 			writer.write(System.getProperty("line.separator"));
-			writer.write("Array increase: " + ss.getArrayIncrease());
+			
+			writer.write("Biggest number (Values in arrays between 0 and biggest number): " + sortStat.getBiggestNumber() +"(Integer.MAX_VALUE)");
 			writer.write(System.getProperty("line.separator"));
-			writer.write("Seed: " + ss.getSeed());
+			writer.write("Arraysize increase with each step : " + sortStat.getArrayIncrease());
 			writer.write(System.getProperty("line.separator"));
-			writer.write("Smallest array includes " + ss.getArrayIncrease()
+			
+			writer.write("Seedvalues: ");
+			for(int seed : seedList) {
+			 writer.write(seed+" ");
+			}
+			
+			writer.write(System.getProperty("line.separator"));
+			writer.write("Smallest array includes " + sortStat.getArrayIncrease()
 					+ " elements.");
 			writer.write(System.getProperty("line.separator"));
-			writer.write("Biggest array includes " + ss.getArrayIncrease()
-					* ss.getNumberOfArrays() + " elements.");
+			writer.write("Biggest array includes " + sortStat.getArrayIncrease()
+					* sortStat.getNumberOfArrays() + " elements.");
+			writer.write(System.getProperty("line.separator"));
+			writer.write(System.getProperty("line.separator"));
+			writer.write("Jede einzelne Spalte in den Ergebnisdateien MS_writingAccesses.txt, QS_writingAccesses.txt, \n" +
+					"MS_comparingOperations.txt und QS_comparingOperations.txt entspricht den Ergebnissen der \n" +
+					"Sortierung von Arrays mit dem gleichen Seed-Wert. Hierbei wurde für Spalte n, der Seedwert n \naus der" +
+					"Liste (s.o.) verwendet.");
+			
 			writer.flush();
 			writer.close();
 
@@ -61,6 +89,14 @@ public class CSVWriter {
 		}
 	}
 
+	
+	/**
+	 * Über die Methode writeWritingAccesses werden die Ergebnisse
+	 * einzelner Sortiervorgänge (Anzahl der schreibenden Zugriffe) 
+	 * an die jeweiligen Ergebnisdateien angehängt. Existiert die 
+	 * Ergebnisdatei für den jeweiligen Sortieralgorithmus noch nicht, 
+	 * wird diese erstellt.
+	 */
 	public void writeWritingAccesses() {
 
 		String path = output.toString() + "/" + measurementName
@@ -76,7 +112,7 @@ public class CSVWriter {
 				br = new BufferedReader(fr);
 				StringBuffer buffer = new StringBuffer();
 
-				for (int value : ss.getWriteAccesses()) {
+				for (int value : sortStat.getWriteAccesses()) {
 					buffer.append(br.readLine().concat(" ")
 							.concat(Integer.toString(value)));
 					buffer.append(System.getProperty("line.separator"));
@@ -96,7 +132,7 @@ public class CSVWriter {
 			try {
 				writer = new FileWriter(writingAccesses, false);
 
-				for (int value : ss.getWriteAccesses()) {
+				for (int value : sortStat.getWriteAccesses()) {
 					writer.write(Integer.toString(value));
 					writer.write(System.getProperty("line.separator"));
 				}
@@ -109,6 +145,14 @@ public class CSVWriter {
 		}
 	}
 
+	
+	/**
+	 * Über die Methode writeCompares werden die Ergebnisse
+	 * einzelner Sortiervorgänge (Anzahl der Vergleiche) an die 
+	 * jeweiligen Ergebnisdateien angehängt. Existiert die 
+	 * Ergebnisdatei für den jeweiligen Sortieralgorithmus noch 
+	 * nicht, wird diese erstellt.
+	 */
 	public void writeCompares() {
 
 		String path = output.toString() + "/" + measurementName
@@ -123,7 +167,7 @@ public class CSVWriter {
 				br = new BufferedReader(fr);
 				StringBuffer buffer = new StringBuffer();
 
-				for (int value : ss.getValuesCompares()) {
+				for (int value : sortStat.getValuesCompares()) {
 					buffer.append(br.readLine().concat(" ")
 							.concat(Integer.toString(value)));
 					buffer.append(System.getProperty("line.separator"));
@@ -143,7 +187,7 @@ public class CSVWriter {
 			try {
 				writer = new FileWriter(comparingOperations, false);
 
-				for (int value : ss.getValuesCompares()) {
+				for (int value : sortStat.getValuesCompares()) {
 					writer.write(Integer.toString(value));
 					writer.write(System.getProperty("line.separator"));
 				}
