@@ -41,7 +41,7 @@ public class SortStatistic {
 		this.biggestNumber = biggestNumber;
 	}
 
-	public int getNumberIncrease() {
+	public int getArrayIncrease() {
 		return numberIncrease;
 	}
 

@@ -3,7 +3,7 @@ public class Main {
 
 	private static int BiggestNumber = Integer.MAX_VALUE;
 	private static int ArrayIncrease = 1;
-	private static int NumberOfArrays = 10000;
+	private static int NumberOfArrays = 20000;
 	private static int Seed = 0;
 	
 	public static void main(String[] args) {
@@ -18,9 +18,9 @@ public class Main {
 
 		QuickSortAlgorithm qsa = null;
 
-		int size = sortStat.getNumberIncrease();
+		int size = sortStat.getArrayIncrease();
 		
-		for (int i = 1;i<(sortStat.getNumberIncrease()*sortStat.getNumberOfArrays());i++) {
+		for (int i = 1;i<(sortStat.getArrayIncrease()*sortStat.getNumberOfArrays());i++) {
 			int[] array = rag.getRandomArray(size, 0, Integer.MAX_VALUE);
 			
 			qsa = new QuickSortAlgorithm(array);
@@ -29,7 +29,7 @@ public class Main {
 			sortStat.addCompareCounter(qsa.getCompareCounter());
 			sortStat.addWriteAccessCounter(qsa.getWriteCounter());
 			
-			size+=sortStat.getNumberIncrease();
+			size+=sortStat.getArrayIncrease();
 		}
 
 		CSVWriter csvWrite = new CSVWriter();
@@ -42,17 +42,15 @@ public class Main {
 
 		MergeSortAlgorithm ms = null;
 
-		
 		sortStat = new SortStatistic();
-		sortStat.setBiggestNumber(Integer.MAX_VALUE);
-		sortStat.setArrayIncrease(1);
-		sortStat.setNumberOfArrays(10000);
-		sortStat.setSeed(0);
-
+		sortStat.setBiggestNumber(BiggestNumber);
+		sortStat.setArrayIncrease(ArrayIncrease);
+		sortStat.setNumberOfArrays(NumberOfArrays);
+		sortStat.setSeed(Seed);
 		
-		int sizeMS = sortStat.getNumberIncrease();
+		int sizeMS = sortStat.getArrayIncrease();
 		
-		for (int i = 1;i<(sortStat.getNumberIncrease()*sortStat.getNumberOfArrays());i++) {
+		for (int i = 1;i<(sortStat.getArrayIncrease()*sortStat.getNumberOfArrays());i++) {
 			int[] array = rag.getRandomArray(sizeMS, 0, Integer.MAX_VALUE);
 			
 			ms = new MergeSortAlgorithm(array);
@@ -61,7 +59,7 @@ public class Main {
   			sortStat.addCompareCounter(ms.getCompareCounter());
   			sortStat.addWriteAccessCounter(ms.getWriteCounter());
 			
-			sizeMS+=sortStat.getNumberIncrease();
+			sizeMS+=sortStat.getArrayIncrease();
 		}
 		
 		csvWrite.setSortStatistic(sortStat);
